@@ -57,10 +57,11 @@ class VideoAnalyzer:
             metrics=[MetricScore(name=m.name, score=m.score, detail=m.detail) for m in analysis.metrics],
             phases=[
                 SwingPhase(
-                    name="estimated_contact",
-                    frame_index=analysis.contact_frame_index,
-                    timestamp_seconds=analysis.contact_timestamp_seconds,
+                    name=phase.name,
+                    frame_index=phase.frame_index,
+                    timestamp_seconds=phase.timestamp_seconds,
                 )
+                for phase in analysis.phases
             ],
             feedback=build_feedback(analysis),
             annotated_video_path=str(annotated_path),

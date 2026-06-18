@@ -48,6 +48,12 @@ htmlcov/
 .coverage.*
 .pytest_cache/
 
+# Local analysis artifacts
+data/uploads/*
+!data/uploads/.gitkeep
+data/outputs/*
+!data/outputs/.gitkeep
+
 # Type checkers
 .mypy_cache/
 

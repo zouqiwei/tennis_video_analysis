@@ -70,3 +70,25 @@ def test_result_before_completion_returns_409(tmp_path: Path):
     response = client.get(f"/api/jobs/{job.job_id}/result")
 
     assert response.status_code == 409
+
+
+def test_result_response_shape_remains_compatible():
+    app.dependency_overrides[get_analyzer] = lambda: FakeAnalyzer()
+    client = TestClient(app)
+
+    response = client.post("/api/analyze", files={"file": ("swing.mp4", b"fake video", "video/mp4")})
+    job_id = response.json()["job_id"]
+    result = client.get(f"/api/jobs/{job_id}/result")
+
+    assert result.status_code == 200
+    data = result.json()
+    assert set(data) == {
+        "job_id",
+        "overall_score",
+        "metrics",
+        "phases",
+        "feedback",
+        "annotated_video_path",
+        "key_frame_paths",
+    }
+    app.dependency_overrides.clear()
