@@ -1,0 +1,60 @@
+{
+  "job_id": "c7f9be8b-69f0-4e09-a0f5-fba61db6295a",
+  "overall_score": 72.5,
+  "metrics": [
+    {
+      "name": "visibility",
+      "score": 27.4,
+      "detail": "27% of sampled frames have usable body landmarks."
+    },
+    {
+      "name": "ready_posture",
+      "score": 96.3,
+      "detail": "Opening posture uses knee bend and torso balance proxies."
+    },
+    {
+      "name": "backswing",
+      "score": 100.0,
+      "detail": "Wrist travel before contact estimates preparation range."
+    },
+    {
+      "name": "contact_position",
+      "score": 97.0,
+      "detail": "Contact estimate checks lead wrist position relative to torso."
+    },
+    {
+      "name": "follow_through",
+      "score": 40.0,
+      "detail": "Wrist continuation after contact estimates follow-through."
+    },
+    {
+      "name": "weight_transfer",
+      "score": 47.1,
+      "detail": "Hip-center movement estimates weight transfer."
+    },
+    {
+      "name": "shoulder_hip_separation",
+      "score": 100.0,
+      "detail": "Shoulder and hip line angle difference estimates rotation."
+    }
+  ],
+  "phases": [
+    {
+      "name": "estimated_contact",
+      "frame_index": 858,
+      "timestamp_seconds": 28.6
+    }
+  ],
+  "feedback": [
+    "Player visibility is limited. Re-record with the full body in frame from preparation through follow-through.",
+    "Continue the swing after contact instead of stopping the racket path early.",
+    "Show more forward weight transfer through the shot while keeping balance.",
+    "These notes are heuristic estimates from pose landmarks and are not a biomechanical diagnosis."
+  ],
+  "annotated_video_path": "data/outputs/c7f9be8b-69f0-4e09-a0f5-fba61db6295a/annotated.mp4",
+  "key_frame_paths": [
+    "data/outputs/c7f9be8b-69f0-4e09-a0f5-fba61db6295a/keyframes/frame_000000.jpg",
+    "data/outputs/c7f9be8b-69f0-4e09-a0f5-fba61db6295a/keyframes/frame_000003.jpg",
+    "data/outputs/c7f9be8b-69f0-4e09-a0f5-fba61db6295a/keyframes/frame_000006.jpg"
+  ]
+}
