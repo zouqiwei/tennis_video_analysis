@@ -171,7 +171,12 @@ def homepage() -> str:
       contact_position: "击球点位置",
       follow_through: "随挥完整度",
       weight_transfer: "重心转移",
-      shoulder_hip_separation: "肩髋旋转"
+      shoulder_hip_separation: "肩髋旋转",
+      knee_bend: "屈膝支撑",
+      torso_stability: "躯干稳定",
+      swing_tempo: "挥拍节奏",
+      arm_extension: "手臂伸展",
+      contact_confidence: "击球识别置信度"
     };
     const metricDetails = {
       visibility: "采样帧中能稳定识别身体关键点的比例。",
@@ -180,7 +185,12 @@ def homepage() -> str:
       contact_position: "根据估计击球瞬间手腕和身体的位置关系判断。",
       follow_through: "根据击球后手腕是否继续向前移动估计随挥完整度。",
       weight_transfer: "根据髋部中心移动估计击球过程中的重心转移。",
-      shoulder_hip_separation: "根据肩线和髋线角度差估计躯干旋转参与度。"
+      shoulder_hip_separation: "根据肩线和髋线角度差估计躯干旋转参与度。",
+      knee_bend: "根据开头阶段膝盖弯曲程度估计下肢支撑。",
+      torso_stability: "根据肩部和髋部中心的上下波动估计躯干稳定性。",
+      swing_tempo: "比较击球前准备时间和击球后延展时间是否均衡。",
+      arm_extension: "根据估计击球瞬间的肩、肘、腕位置估计手臂伸展程度。",
+      contact_confidence: "根据人体可见度和动作峰值清晰度估计击球点识别可靠性。"
     };
 
     button.addEventListener("click", async () => {

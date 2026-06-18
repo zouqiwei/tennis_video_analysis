@@ -60,7 +60,7 @@ class LandmarkAnalysis:
 
 def analyze_landmark_sequence(frames: List[LandmarkFrame]) -> LandmarkAnalysis:
     if not frames:
-        metrics = [MetricResult("visibility", 0, "No pose frames were detected.")]
+        metrics = [MetricResult("visibility", 0, "未检测到可用的人体姿态帧。")]
         return LandmarkAnalysis(0, metrics, 0, 0, [], "left_wrist")
 
     raw_visibility = _visibility_score(frames)
@@ -69,18 +69,18 @@ def analyze_landmark_sequence(frames: List[LandmarkFrame]) -> LandmarkAnalysis:
     phases, contact_index, peak_strength = _detect_phases(smoothed, hitting_wrist)
     contact_frame = smoothed[contact_index]
     metrics = [
-        MetricResult("visibility", raw_visibility, f"{raw_visibility:.0f}% of sampled frames have usable body landmarks."),
-        MetricResult("ready_posture", _ready_posture_score(smoothed), "Opening posture uses knee bend and torso balance proxies."),
-        MetricResult("backswing", _backswing_score(smoothed, contact_index, hitting_wrist), "Selected wrist travel before contact estimates preparation range."),
-        MetricResult("contact_position", _contact_position_score(contact_frame, hitting_wrist), "Contact estimate checks hitting wrist position relative to torso."),
-        MetricResult("follow_through", _follow_through_score(smoothed, contact_index, hitting_wrist), "Selected wrist continuation after contact estimates follow-through."),
-        MetricResult("weight_transfer", _weight_transfer_score(smoothed), "Hip-center movement estimates weight transfer."),
-        MetricResult("shoulder_hip_separation", _rotation_score(smoothed), "Shoulder and hip line angle difference estimates rotation."),
-        MetricResult("knee_bend", _knee_bend_score(smoothed), "Opening knee flexion estimates lower-body loading."),
-        MetricResult("torso_stability", _torso_stability_score(smoothed), "Shoulder and hip center vertical movement estimates torso stability."),
-        MetricResult("swing_tempo", _swing_tempo_score(smoothed, contact_index), "Compares pre-contact preparation time with post-contact continuation."),
-        MetricResult("arm_extension", _arm_extension_score(contact_frame, hitting_wrist), "Hitting arm extension at estimated contact."),
-        MetricResult("contact_confidence", _contact_confidence_score(raw_visibility, peak_strength, len(frames)), "Confidence in the estimated contact frame from visibility and motion clarity."),
+        MetricResult("visibility", raw_visibility, f"{raw_visibility:.0f}% 的采样帧包含可用身体关键点。"),
+        MetricResult("ready_posture", _ready_posture_score(smoothed), "通过起始阶段的膝盖弯曲和身体平衡估计准备姿势。"),
+        MetricResult("backswing", _backswing_score(smoothed, contact_index, hitting_wrist), "根据选定手腕在击球前的移动范围估计引拍准备。"),
+        MetricResult("contact_position", _contact_position_score(contact_frame, hitting_wrist), "检查击球瞬间选定手腕与身体的相对位置。"),
+        MetricResult("follow_through", _follow_through_score(smoothed, contact_index, hitting_wrist), "根据选定手腕在击球后的延续移动估计随挥完整度。"),
+        MetricResult("weight_transfer", _weight_transfer_score(smoothed), "通过髋部中心移动估计重心转移。"),
+        MetricResult("shoulder_hip_separation", _rotation_score(smoothed), "通过肩线和髋线角度差估计旋转。"),
+        MetricResult("knee_bend", _knee_bend_score(smoothed), "通过起始阶段膝盖弯曲估计下肢加载。"),
+        MetricResult("torso_stability", _torso_stability_score(smoothed), "通过肩部和髋部中心的上下波动估计躯干稳定性。"),
+        MetricResult("swing_tempo", _swing_tempo_score(smoothed, contact_index), "比较击球前准备时间和击球后延展时间是否均衡。"),
+        MetricResult("arm_extension", _arm_extension_score(contact_frame, hitting_wrist), "估计击球瞬间手臂伸展程度。"),
+        MetricResult("contact_confidence", _contact_confidence_score(raw_visibility, peak_strength, len(frames)), "根据可见度、动作峰值和帧数估计击球点识别可靠性。"),
     ]
     overall = mean(metric.score for metric in metrics)
     return LandmarkAnalysis(
